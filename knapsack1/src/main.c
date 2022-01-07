@@ -21,7 +21,8 @@ int main (int argc, char**argv)
     // 個数の上限はあらかじめ定めておく
     const int max_items = 100;
     
-    const int n = load_int(argv[1]);
+    Itemset *items = load_itemset(argv[1]);
+    const int n = items->number;
     assert( n <= max_items ); // assert で止める
     assert( n > 0); // 0以下も抑止する
     
@@ -29,10 +30,6 @@ int main (int argc, char**argv)
     assert( W >= 0.0 );
     
     printf("max capacity: W = %.f, # of items: %d\n",W, n);
-    
-    // 乱数シードを1にして、初期化 (ここは変更可能)
-    int seed = 1; 
-    Itemset *items = init_itemset(n, seed);
     print_itemset(items);
     
     // ソルバーで解く
@@ -41,7 +38,7 @@ int main (int argc, char**argv)
     // 表示する
     printf("----\nbest solution:\n");
     printf("value: %4.1f\n",total);
-    
+    //save_itemset("savedata",items);
     free_itemset(items);
     return 0;
 }

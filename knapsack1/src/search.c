@@ -38,8 +38,10 @@ double search(int index, const Itemset *list, double capacity, unsigned char *fl
     
     flags[index] = 1;
     Item item = get_item(list, index);
-    const double v1 = search(index+1, list, capacity, flags, sum_v + get_itemvalue(item), sum_w + get_itemweight(item));
-
+    double v1 = 0;
+    if(!(capacity<sum_w + get_itemweight(item))){
+        v1 = search(index+1, list, capacity, flags, sum_v + get_itemvalue(item), sum_w + get_itemweight(item));
+    }
     // 使った場合の結果と使わなかった場合の結果を比較して返す
     return (v0 > v1) ? v0 : v1;
 }
