@@ -3,14 +3,14 @@
 
 int main(int argc, char **argv){
     if (argc != 2 ){
-	fprintf(stderr, "usage: %s filename\n", argv[0]);
-	exit(1);
+	    fprintf(stderr, "usage: %s filename\n", argv[0]);
+	    exit(1);
     }
     
     FILE *fp;
     if ((fp = fopen(argv[1],"rb")) == NULL){
-	perror(argv[1]);
-	exit(1);
+	    perror(argv[1]);
+	    exit(1);
     }
     
     size_t datasize = 0;

@@ -10,8 +10,8 @@ int main(int argc, char **argv){
     int *used = (int*)calloc(number, sizeof(int));
     
     for(int i = 0 ; i < number ; i++){
-	// まだパターンが確定してないことのフラグを立てておく
-	pattern[i] = -1;
+	    // まだパターンが確定してないことのフラグを立てておく
+	    pattern[i] = -1;
     }
     
     permutation(pattern, used, number);
@@ -29,23 +29,38 @@ void permutation(int *pattern, int *used, size_t number){
     // patternをfor文で確認し，未確定の最初のインデックスをstartに入れる
 
     /* ここにコードをかく */
-
+    for(int i=0 ; i<number ; i++){
+        if(pattern[i]==-1){
+            start = i;
+            break;
+        }
+    }
 
     // パターンが確定した場合（再帰の終端）
     if (start == -1){
-	printf("[ ");
-	for(int i = 0 ; i < number ; i++){
-	    printf("%d ",pattern[i]);
-	}
-	printf("]\n");
-	return;
+	    printf("[ ");
+	    for(int i = 0 ; i < number ; i++){
+	        printf("%d ",pattern[i]);
+	    }
+	    printf("]\n");
+	    return;
     }
 
     // パターンが確定してない場合の処理をを以下にかく
     // used と pattern を更新しながらpermutationを呼び出す
 
     /* ここにコードをかく */
-
+    for(int i=0 ; i<number ; i++){
+        if(used[i]==0){
+            used[i] = 1;
+            pattern[start] = i; 
+            permutation(pattern, used, number);
+            used[i] = 0;
+            pattern[start] = -1;
+        }else{
+            continue;
+        }
+    }
 
     // 終了
     return ;

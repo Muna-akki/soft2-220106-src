@@ -21,13 +21,13 @@ double search(int index, const Itemset *list, double capacity, unsigned char *fl
     assert(index >= 0 && sum_v >= 0 && sum_w >= 0);
     // 必ず再帰の停止条件を明記する (最初が望ましい)
     if (index == max_index){
-	const char *format_ok = ", total_value = %5.1f, total_weight = %5.1f\n";
-	const char *format_ng = ", total_value = %5.1f, total_weight = %5.1f NG\n";
-	for (int i = 0 ; i < max_index ; i++){
-	    printf("%d", flags[i]);
-	}
-	printf((sum_w < capacity)?format_ok:format_ng, sum_v, sum_w);
-	return (sum_w < capacity)?sum_v:0;
+	    const char *format_ok = ", total_value = %5.1f, total_weight = %5.1f\n";
+	    const char *format_ng = ", total_value = %5.1f, total_weight = %5.1f NG\n";
+	    for (int i = 0 ; i < max_index ; i++){
+	        printf("%d", flags[i]);
+	    }
+	    printf((sum_w < capacity)?format_ok:format_ng, sum_v, sum_w);
+	    return (sum_w < capacity)?sum_v:0;
 	
     }
 
