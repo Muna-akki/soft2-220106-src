@@ -14,12 +14,12 @@ int load_int(const char *argvalue)
     errno = 0; // errno.h で定義されているグローバル変数を一旦初期化
     nl = strtol(argvalue,&e,10);
     if (errno == ERANGE){
-	fprintf(stderr,"%s: %s\n",argvalue,strerror(errno));
-	exit(1);
+	    fprintf(stderr,"%s: %s\n",argvalue,strerror(errno));
+	    exit(1);
     }
     if (*e != '\0'){
-	fprintf(stderr,"%s: an irregular character '%c' is detected.\n",argvalue,*e);
-	exit(1);
+	    fprintf(stderr,"%s: an irregular character '%c' is detected.\n",argvalue,*e);
+	    exit(1);
     }
     return (int)nl;
 }
@@ -32,8 +32,8 @@ int main(int argc, char **argv)
     const int max_cities = 100;
     
     if(argc != 4){
-	fprintf(stderr, "usage: %s <number of cities> <random seed> <outputfilename>\n",argv[0]);
-	return EXIT_FAILURE;
+	    fprintf(stderr, "usage: %s <number of cities> <random seed> <outputfilename>\n",argv[0]);
+	    return EXIT_FAILURE;
     }
     int nc = load_int(argv[1]);
     assert( nc > 1 && nc <= max_cities);
@@ -43,27 +43,27 @@ int main(int argc, char **argv)
     int *data = (int*)malloc(sizeof(int)*2*nc);
     int i = 0;
     while(i < nc){
-	char flag = 1;
-	int x = rand() % (width - 10) + 5;
-	int y = rand() % (height - 10) + 5;
-	for (int j = 0 ; j < i ; j++){
-	    if ( (x == data[2*j]) && (y == data[2*j+1]) ){
-		flag = 0;
-		break;
+	    char flag = 1;
+	    int x = rand() % (width - 10) + 5;
+	    int y = rand() % (height - 10) + 5;
+	    for (int j = 0 ; j < i ; j++){
+	        if ( (x == data[2*j]) && (y == data[2*j+1]) ){
+		        flag = 0;
+		        break;
+	        }
 	    }
-	}
-	if(flag){
-	    data[2*i] = x;
-	    data[2*i+1] = y;
-	    i++;
-	}
+	    if(flag){
+	        data[2*i] = x;
+	        data[2*i+1] = y;
+	        i++;
+	    }
     }
        
     
     FILE *fp;
     if ((fp = fopen(argv[3],"wb")) == NULL){
-	fprintf(stderr, "%s: cannot open file.\n",argv[3]);
-	return EXIT_FAILURE;
+	    fprintf(stderr, "%s: cannot open file.\n",argv[3]);
+	    return EXIT_FAILURE;
     }
     fwrite(&nc,sizeof(int),1,fp);
     fwrite(data,sizeof(int),2*nc,fp);

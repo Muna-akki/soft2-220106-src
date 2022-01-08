@@ -3,9 +3,9 @@
 #include <assert.h> // for assert()
 #include <unistd.h> // for sleep()
 #include <string.h> // for memset()
-#include "city.h"
-#include "map.h"
-#include "solve.h"
+#include "./../include/city.h"
+#include "./../include/map.h"
+#include "./../include/solve.h"
 
 int main(int argc, char**argv)
 {
@@ -17,8 +17,8 @@ int main(int argc, char**argv)
     Map map = init_map(width, height);
     
     if (argc != 2){
-	fprintf(stderr, "Usage: %s <city file>\n", argv[0]);
-	exit(1);
+	    fprintf(stderr, "Usage: %s <city file>\n", argv[0]);
+	    exit(1);
     }
     int n = 1;
     City *city = load_cities(argv[1],&n);
@@ -37,7 +37,7 @@ int main(int argc, char**argv)
     plot_cities(map, city, n, route);
     printf("total distance = %f\n", d);
     for (int i = 0 ; i < n ; i++){
-	printf("%d -> ", route[i]);
+	    printf("%d -> ", route[i]);
     }
     printf("0\n");
 
